@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Request
+from .models import RequestRef
 
 class RequestAdmin(admin.ModelAdmin):
-  model = Request
+  model = RequestRef
   readonly_fields = ('request_num', )
   list_display = ('request_num', 'reason', 'name', )
   search_fields = (
@@ -12,4 +12,4 @@ class RequestAdmin(admin.ModelAdmin):
     'findings', 
   )
 
-admin.site.register(Request, RequestAdmin)
+admin.site.register(RequestRef, RequestAdmin)

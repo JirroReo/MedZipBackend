@@ -8,12 +8,12 @@ from rest_framework.generics import (
 )
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from .models import Request
+from .models import RequestRef
 from .serializers import RequestSerializer
 from .paginations import LargePageNumberPagination
 
 class RequestRetrieveUpdateAPIView(RetrieveUpdateAPIView):
-  model = Request
+  model = RequestRef
   serializer_class = RequestSerializer
   pagination_class = LargePageNumberPagination
 
@@ -27,7 +27,7 @@ class RequestRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     return self.model.objects.all().order_by('request_num')
 
 class RequestListAPIView(ListAPIView):
-  model = Request
+  model = RequestRef
   serializer_class = RequestSerializer
   search_fields = ('name', 'company', 'reason', 'findings', )
 

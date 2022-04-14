@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'sorl.thumbnail',
     'accounts.apps.AccountsConfig',
-    'requests.apps.RequestsConfig',
+    'requestsrefs.apps.RequestsrefsConfig',
     'rest_framework.authtoken',
     'django.contrib.admin',
     'django.contrib.auth',

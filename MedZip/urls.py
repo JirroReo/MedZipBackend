@@ -23,7 +23,7 @@ from rest_framework.authtoken.views import obtain_auth_token
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('accounts.urls')),
-    path('request/', include('requests.urls')),
+    path('request/', include('requestsrefs.urls')),
     path('authentication/', obtain_auth_token, name='api_token_auth'),
 ]
 
