@@ -35,3 +35,13 @@ class RequestListAPIView(ListAPIView):
     ordering = self.request.query_params.get('ordering', 'request_num')
     qs = self.model.objects.all()
     return qs.order_by(ordering).distinct()
+
+class RequestCreateAPIView(CreateAPIView):
+  model = RequestRef
+  serializer_class = RequestSerializer
+
+  def create(self, request, **kwargs):
+    # serializer = self.get_serializer(data=self.request.data)
+    # account_id = request.data.pop('account_id')
+    response = super(RequestCreateAPIView, self).create(request, **kwargs)
+    return response

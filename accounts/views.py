@@ -35,3 +35,10 @@ class AccountListAPIView(ListAPIView):
     qs = self.model.objects.filter(is_active=True)
     return qs.order_by(ordering).distinct()
 
+class AccountCreateAPIView(CreateAPIView):
+  model = Account
+  serializer_class = AccountSerializer
+
+  def create(self, request, **kwargs):
+    response = super(AccountCreateAPIView, self).create(request, **kwargs)
+    return response

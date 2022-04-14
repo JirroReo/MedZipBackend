@@ -2,7 +2,8 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from django.urls import re_path
 from .views import (
   RequestRetrieveUpdateAPIView,
-  RequestListAPIView
+  RequestListAPIView,
+  RequestCreateAPIView,
 )
 
 urlpatterns = format_suffix_patterns([
@@ -15,5 +16,10 @@ urlpatterns = format_suffix_patterns([
     r'^all$',
     RequestListAPIView.as_view(),
     name='get_all_requests'
+  ),
+  re_path(
+    r'^create$',
+    RequestCreateAPIView.as_view(),
+    name='create_new_request'
   )
 ])                                                                        

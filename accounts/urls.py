@@ -3,7 +3,8 @@ from django.urls import re_path
 
 from .views import (
   AccountRetrieveUpdateAPIView,
-  AccountListAPIView
+  AccountListAPIView,
+  AccountCreateAPIView
 )
 
 urlpatterns = format_suffix_patterns([
@@ -16,5 +17,10 @@ urlpatterns = format_suffix_patterns([
     r'all$',
     AccountListAPIView.as_view(),
     name='get_all_accounts'
+  ),
+  re_path(
+    r'create$',
+    AccountCreateAPIView.as_view(),
+    name='create_new_account'
   )
 ])
