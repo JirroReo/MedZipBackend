@@ -23,7 +23,13 @@ class AccountRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     return response
 
   def get_queryset(self):
-    return self.model.objects.filter(is_active=True)
+    searchbyuname = self.request.query_params.get('username')
+    qs = self.model.objects.filter(is_active=True)
+    if searchbyuname:
+      qs = qs.filter(username = searchbyuname)
+      
+    return qs
+    # return self.model.objects.filter(is_active=True)
 
 class AccountListAPIView(ListAPIView):
   model = Account
