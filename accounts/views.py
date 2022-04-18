@@ -47,4 +47,3 @@ class AccountCreateAPIView(CreateAPIView):
 
   model = Account
   serializer_class = AccountSerializer
-
