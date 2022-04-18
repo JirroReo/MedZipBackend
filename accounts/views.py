@@ -57,3 +57,4 @@ class AccountCreateAPIView(CreateAPIView):
       return response
     except Account.IntegrityError:
       return Account.objects.get(username=request.get('username'))
+
