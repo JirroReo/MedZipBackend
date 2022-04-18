@@ -48,13 +48,13 @@ class AccountCreateAPIView(CreateAPIView):
   model = Account
   serializer_class = AccountSerializer
 
-  # def create(self, request, **kwargs):
-  #   response = super(AccountCreateAPIView, self).create(request, **kwargs)
-  #   return response
-  def create(self, request, **kwargs): 
-    try:
-      response = Account.objects.create(**request)
-      return response
-    except Account.IntegrityError:
-      return Account.objects.get(username=request.get('username'))
+  def create(self, request, **kwargs):
+    response = super(AccountCreateAPIView, self).create(request, **kwargs)
+    return response
+  # def create(self, request, **kwargs): 
+  #   try:
+  #     response = Account.objects.create(**request)
+  #     return response
+  #   except Account.IntegrityError:
+  #     return Account.objects.get(username=request.get('username'))
 
