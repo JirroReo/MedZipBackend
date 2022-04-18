@@ -8,6 +8,7 @@ from rest_framework.generics import (
 )
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 
 from .models import Account
 from .serializers import AccountSerializer
@@ -42,6 +43,8 @@ class AccountListAPIView(ListAPIView):
     return qs.order_by(ordering).distinct()
 
 class AccountCreateAPIView(CreateAPIView):
+  permission_classes = ([AllowAny])
+  
   model = Account
   serializer_class = AccountSerializer
 
