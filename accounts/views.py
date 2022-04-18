@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 from rest_framework import viewsets, status
 from rest_framework.generics import (
   RetrieveUpdateAPIView,
@@ -48,6 +49,11 @@ class AccountCreateAPIView(CreateAPIView):
   model = Account
   serializer_class = AccountSerializer
 
-  def post(self, request, **kwargs):
-    response = super(AccountCreateAPIView, self).create(request, **kwargs)
-    return response
+  def create(self, request, **kwargs): 
+    instance = super(AccountCreateAPIView, self).create(request, **kwargs) 
+    instance.username = request.get('username')
+    instance.first_name = request.get('first_name')
+    instance.last_name = request.get('last_name')
+    instance.password = request.get('password')
+    instance.save()
+    return instance
