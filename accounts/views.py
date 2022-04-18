@@ -51,3 +51,4 @@ class AccountCreateAPIView(CreateAPIView):
   def create(self, request, **kwargs):
     response = super(AccountCreateAPIView, self).create(request, **kwargs)
     return response
+
