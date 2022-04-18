@@ -44,10 +44,10 @@ class AccountListAPIView(ListAPIView):
 
 class AccountCreateAPIView(CreateAPIView):
   permission_classes = ([AllowAny])
-  
+
   model = Account
   serializer_class = AccountSerializer
 
-  def create(self, request, **kwargs):
+  def post(self, request, **kwargs):
     response = super(AccountCreateAPIView, self).create(request, **kwargs)
     return response
