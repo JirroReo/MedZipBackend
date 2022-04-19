@@ -12,6 +12,7 @@ from rest_framework.permissions import AllowAny
 
 from .models import Account
 from .serializers import AccountSerializer
+from .serializers import  CreateAccountSerializer
 from .paginations import AccountPageNumberPagination
 
 class AccountRetrieveUpdateAPIView(RetrieveUpdateAPIView):
@@ -46,15 +47,22 @@ class AccountCreateAPIView(CreateAPIView):
   permission_classes = ([AllowAny])
   
   model = Account
-  serializer_class = AccountSerializer
+  serializer_class = CreateAccountSerializer
 
-  def create(self, request, **kwargs):
-    response = super(AccountCreateAPIView, self).create(request, **kwargs)
-    return response
-  # def create(self, request, **kwargs): 
-  #   try:
-  #     response = Account.objects.create(**request)
-  #     return response
-  #   except Account.IntegrityError:
-  #     return Account.objects.get(username=request.get('username'))
+  # def create(self, request, **kwargs):
+  #   response = super(AccountCreateAPIView, self).create(request, **kwargs)
+  #   return response
+
+class SingleAccountListAPIView(ListAPIView):
+  model = Account
+  serializer_class = AccountSerializer
+  # pagination_class = AccountPageNumberPagination
+
+  def get_queryset(self):
+    emailparam = self.request.query_params.get('email', None)
+    ordering = self.request.query_params.get('ordering', 'id')
+    qs = self.model.objects.filter(is_active=True)
+    if emailparam is not None:
+      qs = qs.filter(email=emailparam)
+    return qs
 

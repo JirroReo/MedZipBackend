@@ -3,11 +3,14 @@ from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import make_password
 
 class Account(AbstractUser):
+  username = None
   email = models.EmailField(
     verbose_name='email address',
     max_length=255,
     unique=True,
   )
+  USERNAME_FIELD = 'email'
+  REQUIRED_FIELDS = []
   # USERNAME_FIELD = 'email'
   USER_TYPE_CHOICES = (
     ('Patient', 'Patient'),
@@ -21,6 +24,20 @@ class Account(AbstractUser):
   seed_phrase = models.CharField(
     max_length=255,
     unique=True,
+  )
+  first_name = models.CharField(
+    max_length=20,
+    null=True, 
+    blank=True,
+  )
+  last_name = models.CharField(
+    max_length=20,
+    null=True, 
+    blank=True,
+  )
+  password = models.CharField(
+    max_length=100,
+    default='none'
   )
   contact_no = models.IntegerField(null=True, blank=True)
   birthday = models.DateField(null=True, blank=True)
@@ -62,7 +79,7 @@ class Account(AbstractUser):
   
   @property
   def full_name(self):
-    return self.get_full_name()
+    return self.first_name + ' ' + self.last_name
  
   def save(self, *args, **kwargs):
     self.seed_phrase = make_password(self.seed_phrase)

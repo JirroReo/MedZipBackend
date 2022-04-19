@@ -43,9 +43,10 @@ class AccountAdmin(UserAdmin):
     list_filter = (
 	'is_active',
     )
-    list_display = ('full_name', 'email', 'username', )
-    search_fields = ('full_name', 'email', 'username', )
+    list_display = ('full_name', 'email', )
+    search_fields = ('full_name', 'email', )
     readonly_fields = ('id', 'seed_phrase', )
+    ordering= ('email',)
     
     fieldsets = (
         (None, {

@@ -34,3 +34,8 @@ class AccountSerializer(serializers.ModelSerializer):
         )
 
       return picture.url
+class CreateAccountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = "__all__"
+
