@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import RequestRef
+from .models import RequestRef, AcceptRejectModel, TransactionModel
 
 class RequestAdmin(admin.ModelAdmin):
   model = RequestRef
@@ -13,3 +13,5 @@ class RequestAdmin(admin.ModelAdmin):
   )
 
 admin.site.register(RequestRef, RequestAdmin)
+admin.site.register(AcceptRejectModel)
+admin.site.register(TransactionModel)
