@@ -1,24 +1,67 @@
+from requests import request
 from rest_framework import serializers
-from accounts.serializers import AccountSerializer
+from accounts.models import Account
+from .models import RequestRef, AcceptRejectModel, TransactionModel
 
-from .models import RequestRef
 
 class RequestSerializer(serializers.ModelSerializer):
-  account = AccountSerializer(read_only=True)
+    account = serializers.PrimaryKeyRelatedField(
+        queryset=Account.objects.all())
 
-  class Meta:
-    model = RequestRef
-    depth = 2
-    fields = (
-      'request_num',
-      'request_type',
-      'name',
-      'company',
-      'reason',
-      'appointment_date',
-      'findings',
-      'session',
-      'request',
-      'prescription',
-      'account',
-    )
+    class Meta:
+        model = RequestRef
+        depth = 2
+        fields = (
+            'request_num',
+            'request_type',
+            'name',
+            'company',
+            'reason',
+            'appointment_date',
+            'findings',
+            'session',
+            'request',
+            'prescription',
+            'account',
+        )
+
+
+# Serializer for Accept Reject Table
+class AcceptRejectSerializer(serializers.ModelSerializer):
+    request_num = serializers.PrimaryKeyRelatedField(
+        queryset=RequestRef.objects.all())
+
+    class Meta:
+        model = AcceptRejectModel
+        depth = 2
+        fields = (
+            'entry_num',
+            'request_num',
+            'date',
+            'doctor_name',
+            'recommendation',
+            'summary',
+            'explanation',
+            'medical_order',
+            'others',
+            'status',
+
+        )
+
+
+# Serializer for Transaction Table
+class TransactionSerializer(serializers.ModelSerializer):
+
+    transaction_id = serializers.PrimaryKeyRelatedField(
+        queryset=AcceptRejectModel.objects.all())
+
+    class Meta:
+        model = TransactionModel
+        depth = 2
+        fields = (
+            'transaction_id',
+            'date',
+            'summary',
+            'from_p',
+            'to',
+        )
