@@ -1,8 +1,11 @@
 from django.db import models
 from accounts.models import Account
+from hashid_field import HashidAutoField
+from django.core.management.utils import get_random_secret_key
 
 
 class RequestRef(models.Model):
+    
     request_num = models.AutoField(
         primary_key=True,
         unique=True,
@@ -61,11 +64,12 @@ class RequestRef(models.Model):
 
 # Accept reject Model
 class AcceptRejectModel(models.Model):
-    entry_num = models.AutoField(
-        primary_key=True,
-        unique=True,
-        editable=False,
-    )
+    entry_num = HashidAutoField(primary_key=True, salt = get_random_secret_key())
+    # entry_num = models.AutoField(
+    #     primary_key=True,
+    #     unique=True,
+    #     editable=False,
+    # )
     request_num = models.ForeignKey(RequestRef, on_delete=models.CASCADE)
     date = models.DateField()
 
@@ -110,7 +114,7 @@ class AcceptRejectModel(models.Model):
     )
 
     def __str__(self):
-        return f'{self.doctor_name} {self.status}'
+        return f'{self.entry_num}'
 
 
 # Transaction Table
