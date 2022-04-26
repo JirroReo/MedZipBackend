@@ -1,13 +1,13 @@
 from requests import request
 from rest_framework import serializers
 from accounts.models import Account
+from hashid_field.rest import HashidSerializerCharField
 from .models import RequestRef, AcceptRejectModel, TransactionModel
 
 
 class RequestSerializer(serializers.ModelSerializer):
     account = serializers.PrimaryKeyRelatedField(
         queryset=Account.objects.all())
-
     class Meta:
         model = RequestRef
         depth = 2
@@ -29,6 +29,7 @@ class RequestSerializer(serializers.ModelSerializer):
 # Serializer for Accept Reject Table
 class AcceptRejectSerializer(serializers.ModelSerializer):
     request_num = serializers.PrimaryKeyRelatedField(
+      
         queryset=RequestRef.objects.all())
 
     class Meta:
@@ -53,6 +54,7 @@ class AcceptRejectSerializer(serializers.ModelSerializer):
 class TransactionSerializer(serializers.ModelSerializer):
 
     transaction_id = serializers.PrimaryKeyRelatedField(
+        pk_field=HashidSerializerCharField(source_field='requestsrefs.AcceptRejectModel.entry_num'),
         queryset=AcceptRejectModel.objects.all())
 
     class Meta:
