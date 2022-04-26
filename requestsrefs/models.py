@@ -1,11 +1,8 @@
+import uuid
 from django.db import models
 from accounts.models import Account
-from hashid_field import HashidAutoField
-from django.core.management.utils import get_random_secret_key
-
 
 class RequestRef(models.Model):
-    
     request_num = models.AutoField(
         primary_key=True,
         unique=True,
@@ -64,7 +61,7 @@ class RequestRef(models.Model):
 
 # Accept reject Model
 class AcceptRejectModel(models.Model):
-    entry_num = HashidAutoField(primary_key=True, salt = get_random_secret_key())
+    entry_num = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     # entry_num = models.AutoField(
     #     primary_key=True,
     #     unique=True,
