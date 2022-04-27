@@ -45,6 +45,20 @@ class RequestCreateAPIView(CreateAPIView):
         response = super(RequestCreateAPIView, self).create(request, **kwargs)
         return response
 
+class SingleRequestListAPIView(ListAPIView):
+  model = RequestRef
+  serializer_class = RequestSerializer
+
+  def get_queryset(self):
+    accid = self.request.query_params.get('accid')
+    qs = RequestRef.objects.filter(account__pk=accid)
+    ordering = self.request.query_params.get('ordering', 'request_num')
+    if qs is not None:
+        return qs
+    else:
+        data['message'] = 'No records found'
+        return data
+
 # API FOR THE ACCEPT REJECT TABLE
 
 # to update the record
