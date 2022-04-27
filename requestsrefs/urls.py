@@ -4,6 +4,7 @@ from .views import (
     RequestRetrieveUpdateAPIView,
     RequestListAPIView,
     RequestCreateAPIView,
+    SingleRequestListAPIView,
     AcceptRejectRetrieveUpdateAPIView,
     AcceptRejectListAPIView,
     AcceptRejectCreateAPIView,
@@ -27,6 +28,11 @@ urlpatterns = format_suffix_patterns([
         r'^create$',
         RequestCreateAPIView.as_view(),
         name='create_new_request'
+    ),
+    re_path(
+        r'^details$',
+        SingleRequestListAPIView.as_view(),
+        name='get_single_request'
     ),
 
 

@@ -49,10 +49,6 @@ class AccountCreateAPIView(CreateAPIView):
   model = Account
   serializer_class = CreateAccountSerializer
 
-  # def create(self, request, **kwargs):
-  #   response = super(AccountCreateAPIView, self).create(request, **kwargs)
-  #   return response
-
 class SingleAccountListAPIView(ListAPIView):
   model = Account
   serializer_class = AccountSerializer
