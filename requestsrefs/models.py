@@ -62,11 +62,7 @@ class RequestRef(models.Model):
 # Accept reject Model
 class AcceptRejectModel(models.Model):
     entry_num = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    # entry_num = models.AutoField(
-    #     primary_key=True,
-    #     unique=True,
-    #     editable=False,
-    # )
+    
     request_num = models.ForeignKey(RequestRef, on_delete=models.CASCADE)
     date = models.DateField()
 

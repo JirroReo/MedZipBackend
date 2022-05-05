@@ -119,3 +119,14 @@ class TransactionCreateAPIView(CreateAPIView):
     def create(self, request, **kwargs):
         response = super(TransactionCreateAPIView, self).create(request, **kwargs)
         return response
+
+
+# view to get data from Transaction table using primary key of Accept reject table
+class TransactionAcceptListAPIView(ListAPIView):
+    model = TransactionModel
+    serializer_class = TransactionSerializer
+
+    def get_queryset(self):
+        pk = self.kwargs.get('slug')
+        transactions = self.model.objects.prefetch_related('transaction_id').filter(transaction_id = pk)
+        return transactions
