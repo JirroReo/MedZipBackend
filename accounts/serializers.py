@@ -40,6 +40,7 @@ class CreateAccountSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class ChangePasswordSerializer(serializers.ModelSerializer):
+  class Meta:
     model = Account
 
     """

@@ -16,22 +16,22 @@ urlpatterns = format_suffix_patterns([
     name='get_or_update_account'
   ),
   re_path(
-    r'all$',
+    r'^all$',
     AccountListAPIView.as_view(),
     name='get_all_accounts'
   ),
   re_path(
-    r'create$',
+    r'^create$',
     AccountCreateAPIView.as_view(),
     name='create_new_account'
   ),
   re_path(
-    r'user$',
+    r'^user$',
     SingleAccountListAPIView.as_view(),
     name='get_single_account'
   ),
   re_path(
-    r'changepassword$',
+    r'^changepassword$',
     ChangePasswordView.as_view(),
     name='account_change_password'
   )
