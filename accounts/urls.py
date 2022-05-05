@@ -5,7 +5,8 @@ from .views import (
   AccountRetrieveUpdateAPIView,
   AccountListAPIView,
   AccountCreateAPIView,
-  SingleAccountListAPIView
+  SingleAccountListAPIView,
+  ChangePasswordView
 )
 
 urlpatterns = format_suffix_patterns([
@@ -28,5 +29,10 @@ urlpatterns = format_suffix_patterns([
     r'user$',
     SingleAccountListAPIView.as_view(),
     name='get_single_account'
+  ),
+  re_path(
+    r'changepassword$',
+    ChangePasswordView.as_view(),
+    name='account_change_password'
   )
 ])
