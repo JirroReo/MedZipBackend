@@ -11,6 +11,7 @@ from .views import (
     TransactionRetrieveUpdateAPIView,
     TransactionListAPIView,
     TransactionCreateAPIView,
+    TransactionAcceptListAPIView
 )
 
 urlpatterns = format_suffix_patterns([
@@ -78,7 +79,14 @@ urlpatterns = format_suffix_patterns([
         r'^transaction/create$',
         TransactionCreateAPIView.as_view(),
         name='create_new_transaction'
+
     ),
 
+    # list all Transaction records usind pk from accept reject table
+    re_path(
+        r'^transaction/all/(?P<slug>[-\w]+)/$',
+        TransactionAcceptListAPIView.as_view(),
+        name="list_all_transaction_with_pk"
+    ),
 
 ])
