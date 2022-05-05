@@ -16,6 +16,8 @@ from .serializers import  CreateAccountSerializer
 from .serializers import ChangePasswordSerializer
 from .paginations import AccountPageNumberPagination
 
+from rest_framework.permissions import IsAuthenticated 
+
 class AccountRetrieveUpdateAPIView(RetrieveUpdateAPIView):
   model = Account
   serializer_class = AccountSerializer
@@ -69,7 +71,7 @@ class ChangePasswordView(UpdateAPIView):
         """
         serializer_class = ChangePasswordSerializer
         model = Account
-        permission_classes = ([AllowAny])
+        permission_classes = (IsAuthenticated,)
 
         def get_object(self, queryset=None):
             obj = self.request.user
