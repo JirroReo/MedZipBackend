@@ -42,7 +42,7 @@ class CreateAccountSerializer(serializers.ModelSerializer):
 class ChangePasswordSerializer(serializers.ModelSerializer):
   class Meta:
     model = Account
-    fields = "__all__"
+    fields = ('password',)
 
     """
     Serializer for password change endpoint.
