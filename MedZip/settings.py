@@ -69,6 +69,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
    'http://localhost:8080',
    'https://localhost:8080',
+   'https://medzip.netlify.app',
 ]
 
 ROOT_URLCONF = 'MedZip.urls'
